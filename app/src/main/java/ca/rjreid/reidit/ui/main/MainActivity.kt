@@ -10,8 +10,6 @@ import ca.rjreid.reidit.ui.base.BaseActivity
 
 class MainActivity : BaseActivity() {
 
-    private var counter = 0
-
     @BindView(R.id.test_textView) lateinit var testTextView: TextView
 
     //region Lifecycle
@@ -22,10 +20,9 @@ class MainActivity : BaseActivity() {
     //endregion
 
     //region Click Listeners
-    @OnClick(R.id.test_button)
-    internal fun testButtonClicked() {
-        counter++
-        testTextView.text = counter.toString()
+    @OnClick(R.id.signin)
+    internal fun signinButtonClicked() {
+
     }
 
     //endregion

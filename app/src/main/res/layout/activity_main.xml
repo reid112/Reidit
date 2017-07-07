@@ -18,11 +18,9 @@
         android:text="@string/title_home" />
 
     <Button
-        android:id="@+id/test_button"
+        android:id="@+id/signin"
+        android:text="Sign In With Reddit"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="test button"
-        tools:layout_editor_absoluteY="0dp"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
