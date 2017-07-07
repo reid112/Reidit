@@ -81,7 +81,6 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
-
     // Butter Knife (https://github.com/JakeWharton/butterknife)
     compile 'com.jakewharton:butterknife:8.6.0'
     kapt 'com.jakewharton:butterknife-compiler:8.6.0'
