@@ -1,7 +1,15 @@
 package ca.rjreid.reidit.ui.main
 
-import ca.rjreid.reidit.ui.base.BasePresenter
+import javax.inject.Inject
 
-class MainPresenter : BasePresenter() {
+class MainPresenter {
+    //region Variables
+    private val delegate: MainDelegate
+    //endregion
 
+    //region Constructor
+    @Inject constructor(mainDelegate: MainDelegate) {
+        this.delegate = mainDelegate
+    }
+    //endregion
 }

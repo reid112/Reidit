@@ -1,4 +1,4 @@
-package ca.rjreid.reidit.di
+package ca.rjreid.reidit.di.qualifier
 
 import javax.inject.Qualifier
 

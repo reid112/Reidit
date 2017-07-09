@@ -1,3 +1,5 @@
 package ca.rjreid.reidit.ui.base
 
-abstract class BasePresenter
+abstract class BasePresenter() {
+
+}
