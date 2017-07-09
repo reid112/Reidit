@@ -18,6 +18,9 @@ import javax.inject.Singleton
 class DataModule {
 
     @Provides @Singleton
+    fun provideBaseUrl(): String = "http://www.BaseUrlHere.com"
+
+    @Provides @Singleton
     fun provideCache(@ApplicationContext context: Context) = Cache(context.cacheDir, 10 * 1024 * 1024.toLong())
 
     @Provides @Singleton
@@ -36,9 +39,9 @@ class DataModule {
                     .build()
 
     @Provides @Singleton
-    fun provideRestAdapter(client: OkHttpClient, converterFactory: GsonConverterFactory, callAdapterFactory: RxJava2CallAdapterFactory): Retrofit {
+    fun provideRestAdapter(baseUrl: String, client: OkHttpClient, converterFactory: GsonConverterFactory, callAdapterFactory: RxJava2CallAdapterFactory): Retrofit {
         return Retrofit.Builder()
-                .baseUrl("http://www.BaseUrlHere.com")
+                .baseUrl(baseUrl)
                 .client(client)
                 .addConverterFactory(converterFactory)
                 .addCallAdapterFactory(callAdapterFactory)
