@@ -116,9 +116,6 @@ dependencies {
 
     // Dagger (https://github.com/google/dagger)
     compile 'com.google.dagger:dagger:2.11'
-    compile 'com.google.dagger:dagger-android:2.11'
-    compile 'com.google.dagger:dagger-android-support:2.11'
-    kapt 'com.google.dagger:dagger-android-processor:2.11'
     kapt 'com.google.dagger:dagger-compiler:2.11'
 
     // SQLBrite (https://github.com/square/sqlbrite)
