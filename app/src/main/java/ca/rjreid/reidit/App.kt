@@ -2,14 +2,11 @@ package ca.rjreid.reidit
 
 import android.app.Application
 import ca.rjreid.reidit.di.component.ApplicationComponent
-import ca.rjreid.reidit.di.component.DaggerApplicationComponent
 import timber.log.Timber
 
 class App : Application() {
 
-    companion object {
-        lateinit var component: ApplicationComponent
-    }
+    lateinit var appComponent: ApplicationComponent
 
     override fun onCreate() {
         super.onCreate()
@@ -18,6 +15,6 @@ class App : Application() {
     }
 
     fun initializeDagger() {
-        component = DaggerApplicationComponent.builder().build()
+        appComponent = DaggerApplicationComponent.builder().build()
     }
 }

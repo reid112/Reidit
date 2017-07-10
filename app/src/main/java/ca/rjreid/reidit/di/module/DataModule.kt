@@ -2,6 +2,8 @@ package ca.rjreid.reidit.di.module
 
 import android.content.Context
 import ca.rjreid.reidit.BuildConfig
+import ca.rjreid.reidit.data.DataManager
+import ca.rjreid.reidit.data.DataManagerWrapper
 import ca.rjreid.reidit.data.remote.RedditService
 import ca.rjreid.reidit.di.qualifier.ApplicationContext
 import dagger.Module
@@ -50,4 +52,7 @@ class DataModule {
 
     @Provides @Singleton
     fun providesRedditService(retrofit: Retrofit): RedditService = retrofit.create(RedditService::class.java)
+
+    @Provides @Singleton
+    fun providesDataManger(redditService: RedditService): DataManager = DataManagerWrapper(redditService)
 }

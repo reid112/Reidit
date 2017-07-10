@@ -1,5 +1,7 @@
 package ca.rjreid.reidit.data
 
-enum class DataManager {
-    INSTANCE;
+interface DataManager {
+
+//    fun getRandomJokes(count: Int): Observable<List<Joke>>
+
 }

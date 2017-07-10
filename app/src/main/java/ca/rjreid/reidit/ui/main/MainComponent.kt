@@ -1,12 +1,10 @@
 package ca.rjreid.reidit.ui.main
 
-import ca.rjreid.reidit.di.component.ApplicationComponent
-import ca.rjreid.reidit.di.scope.ActivityScope
-import dagger.Component
+import ca.rjreid.reidit.di.scope.PerActivity
+import dagger.Subcomponent
 
-@ActivityScope
-@Component(dependencies = arrayOf(ApplicationComponent::class), modules = arrayOf(MainModule::class))
+@PerActivity
+@Subcomponent
 interface MainComponent {
-    fun inject(delegate: MainDelegate)
-    fun presenter(): MainPresenter
+    fun inject(activity: MainActivity)
 }

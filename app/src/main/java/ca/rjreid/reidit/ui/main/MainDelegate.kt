@@ -1,5 +1,7 @@
 package ca.rjreid.reidit.ui.main
 
-interface MainDelegate {
+import ca.rjreid.reidit.ui.base.ViewDelegate
+
+interface MainDelegate : ViewDelegate {
 
 }

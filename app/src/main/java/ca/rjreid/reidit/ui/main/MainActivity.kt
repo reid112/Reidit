@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class MainActivity : BaseActivity(), MainDelegate {
     //region Variables
-    @Inject internal lateinit var presenter: MainPresenter
+    @Inject lateinit var presenter: MainPresenter
     //endregion
 
     //region Views
@@ -23,7 +23,14 @@ class MainActivity : BaseActivity(), MainDelegate {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         ButterKnife.bind(this)
+        presenter.bind(this)
     }
+
+    override fun onDestroy() {
+        presenter.destroy()
+        super.onDestroy()
+    }
+
     //endregion
 
     //region Click Listeners
@@ -31,20 +38,13 @@ class MainActivity : BaseActivity(), MainDelegate {
     internal fun signinButtonClicked() {
 
     }
-
     //endregion
 
     //region BaseActivity Implementation
-    override fun getLayout(): Int {
-        return R.layout.activity_main
-    }
+    override fun getLayout() = R.layout.activity_main
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
-        DaggerMainComponent.builder()
-                .applicationComponent(applicationComponent)
-                .mainModule(MainModule(this))
-                .build()
-                .inject(this)
+        applicationComponent.mainComponent().inject(this)
     }
     //endregion
 }
