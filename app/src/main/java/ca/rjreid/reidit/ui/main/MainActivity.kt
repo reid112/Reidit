@@ -44,7 +44,7 @@ class MainActivity : BaseActivity(), MainDelegate {
     override fun getLayout() = R.layout.activity_main
 
     override fun injectDependencies(applicationComponent: ApplicationComponent) {
-        applicationComponent.mainComponent().inject(this)
+        applicationComponent.inject(this)
     }
     //endregion
 }

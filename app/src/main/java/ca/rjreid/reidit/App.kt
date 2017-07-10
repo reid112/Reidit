@@ -2,6 +2,8 @@ package ca.rjreid.reidit
 
 import android.app.Application
 import ca.rjreid.reidit.di.component.ApplicationComponent
+import ca.rjreid.reidit.di.component.DaggerApplicationComponent
+import ca.rjreid.reidit.di.module.ApplicationModule
 import timber.log.Timber
 
 class App : Application() {
@@ -15,6 +17,8 @@ class App : Application() {
     }
 
     fun initializeDagger() {
-        appComponent = DaggerApplicationComponent.builder().build()
+        appComponent = DaggerApplicationComponent.builder()
+                .applicationModule(ApplicationModule(this))
+                .build()
     }
 }

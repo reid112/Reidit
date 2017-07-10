@@ -7,10 +7,4 @@ import javax.inject.Singleton
 @Singleton
 internal class DataManagerWrapper @Inject constructor(val redditService: RedditService) : DataManager {
 
-//    override fun getRandomJokes(count: Int): Observable<List<Joke>> {
-//        return jokesService
-//                .fetchRandomJokes(count)
-//                .flatMap { Observable.just(it.value) }
-//    }
-
 }
