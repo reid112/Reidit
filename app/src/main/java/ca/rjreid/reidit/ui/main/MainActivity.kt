@@ -1,7 +1,6 @@
 package ca.rjreid.reidit.ui.main
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.TextView
 import butterknife.BindView
 import butterknife.ButterKnife
@@ -31,14 +30,12 @@ class MainActivity : BaseActivity(), MainDelegate {
     //region Click Listeners
     @OnClick(R.id.signin)
     internal fun signinButtonClicked() {
-        presenter.test()
+
     }
     //endregion
 
     //region View Delegate Implementation
-    override fun test(s: String) {
-        Log.d("REID", s)
-    }
+
     //endregion
 
     //region BaseActivity Implementation
