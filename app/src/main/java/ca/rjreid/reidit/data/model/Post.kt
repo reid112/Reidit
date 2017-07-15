@@ -4,7 +4,7 @@ import android.os.Parcel
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
-data class ChildData(
+data class Post(
         val id: String,
         val name: String,
         val subreddit: String,
@@ -20,9 +20,9 @@ data class ChildData(
         val score: Long) : Parcelable {
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<ChildData> = object : Parcelable.Creator<ChildData> {
-            override fun createFromParcel(source: Parcel): ChildData = ChildData(source)
-            override fun newArray(size: Int): Array<ChildData?> = arrayOfNulls(size)
+        @JvmField val CREATOR: Parcelable.Creator<Post> = object : Parcelable.Creator<Post> {
+            override fun createFromParcel(source: Parcel): Post = Post(source)
+            override fun newArray(size: Int): Array<Post?> = arrayOfNulls(size)
         }
     }
 

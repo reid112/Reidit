@@ -2,23 +2,24 @@ package ca.rjreid.reidit.data.model
 
 import android.os.Parcel
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 
-data class ResponseData(
+data class PostsData(
         val modHash: String,
-        val children: List<Child>,
+        @SerializedName("children") val postHolders: List<PostHolder>,
         val after: String?,
         val before: String?) : Parcelable {
 
     companion object {
-        @JvmField val CREATOR: Parcelable.Creator<ResponseData> = object : Parcelable.Creator<ResponseData> {
-            override fun createFromParcel(source: Parcel): ResponseData = ResponseData(source)
-            override fun newArray(size: Int): Array<ResponseData?> = arrayOfNulls(size)
+        @JvmField val CREATOR: Parcelable.Creator<PostsData> = object : Parcelable.Creator<PostsData> {
+            override fun createFromParcel(source: Parcel): PostsData = PostsData(source)
+            override fun newArray(size: Int): Array<PostsData?> = arrayOfNulls(size)
         }
     }
 
     constructor(source: Parcel) : this(
             source.readString(),
-            source.createTypedArrayList(Child.CREATOR),
+            source.createTypedArrayList(PostHolder.CREATOR),
             source.readString(),
             source.readString()
     )
@@ -27,7 +28,7 @@ data class ResponseData(
 
     override fun writeToParcel(dest: Parcel, flags: Int) {
         dest.writeString(modHash)
-        dest.writeTypedList(children)
+        dest.writeTypedList(postHolders)
         dest.writeString(after)
         dest.writeString(before)
     }

@@ -16,4 +16,9 @@ class MainActivityModule {
     internal fun provideMainPresenter(mainView: MainDelegate, redditService: RedditService): MainPresenter {
         return MainPresenter(mainView, redditService)
     }
+
+    @Provides
+    internal fun provideMainAdapter(): MainAdapter {
+        return MainAdapter()
+    }
 }

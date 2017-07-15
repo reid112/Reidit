@@ -1,24 +1,26 @@
 package ca.rjreid.reidit.ui.main
 
 import android.os.Bundle
-import android.util.Log
-import android.widget.TextView
+import android.support.v4.widget.SwipeRefreshLayout
+import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.RecyclerView
 import butterknife.BindView
 import butterknife.ButterKnife
-import butterknife.OnClick
 import ca.rjreid.reidit.R
-import ca.rjreid.reidit.data.model.Response
+import ca.rjreid.reidit.data.model.PostHolder
 import ca.rjreid.reidit.ui.base.BaseActivity
 import dagger.android.AndroidInjection
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainDelegate {
+class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshListener {
     //region Variables
     @Inject lateinit var presenter: MainPresenter
+    @Inject lateinit var adapter: MainAdapter
     //endregion
 
     //region Views
-    @BindView(R.id.test_textView) lateinit var testTextView: TextView
+    @BindView(R.id.main_swipe_refresh_layout) lateinit var refreshLayout: SwipeRefreshLayout
+    @BindView(R.id.main_posts_recycler_view) lateinit var recyclerView: RecyclerView
     //endregion
 
     //region Lifecycle
@@ -36,17 +38,38 @@ class MainActivity : BaseActivity(), MainDelegate {
     //endregion
 
     //region Click Listeners
-    @OnClick(R.id.signin)
-    internal fun signinButtonClicked() {
-        presenter.fetchFrontPage()
-    }
+//    @OnClick(R.id.signin)
+//    internal fun signinButtonClicked() {
+//        presenter.fetchFrontPage()
+//    }
     //endregion
 
     //region View Delegate Implementation
-    override fun displayPosts(response: Response) {
-        Log.d("REID", response.toString())
+    override fun initRecyclerView() {
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.adapter = adapter
     }
-//endregion
+
+    override fun initRefreshLayout() {
+        refreshLayout.setOnRefreshListener(this)
+    }
+
+    override fun updatePosts(postHolders: List<PostHolder>) {
+        refreshLayout.isRefreshing = false
+        adapter.updatePosts(postHolders)
+    }
+
+    override fun clearPosts() {
+        adapter.clearPosts()
+    }
+    //endregion
+
+    //region OnRefreshListener Implementation
+    override fun onRefresh() {
+        refreshLayout.isRefreshing = true
+        presenter.refresh()
+    }
+    //endregion
 
     //region BaseActivity Implementation
     override fun getLayout() = R.layout.activity_main
