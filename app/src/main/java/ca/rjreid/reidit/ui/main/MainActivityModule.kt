@@ -1,5 +1,6 @@
 package ca.rjreid.reidit.ui.main
 
+import ca.rjreid.reidit.data.remote.RedditService
 import dagger.Module
 import dagger.Provides
 
@@ -12,7 +13,7 @@ class MainActivityModule {
     }
 
     @Provides
-    internal fun provideMainPresenter(mainView: MainDelegate): MainPresenter {
-        return MainPresenter(mainView)
+    internal fun provideMainPresenter(mainView: MainDelegate, redditService: RedditService): MainPresenter {
+        return MainPresenter(mainView, redditService)
     }
 }

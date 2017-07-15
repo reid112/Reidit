@@ -9,8 +9,9 @@ import ca.rjreid.reidit.di.module.PicassoModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
+import javax.inject.Singleton
 
-
+@Singleton
 @Component(modules = arrayOf(
         AndroidInjectionModule::class,
         ActivityBuilderModule::class,
