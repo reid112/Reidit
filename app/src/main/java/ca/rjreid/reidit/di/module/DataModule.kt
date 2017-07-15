@@ -20,7 +20,7 @@ import javax.inject.Singleton
 class DataModule {
 
     companion object {
-        const val REDDIT_BASE_URL = "http://rjreid.ca"
+        const val REDDIT_BASE_URL = "https://www.reddit.com"
     }
 
     @Provides @Singleton
