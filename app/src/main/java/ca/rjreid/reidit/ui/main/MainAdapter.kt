@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import ca.rjreid.reidit.R
 import ca.rjreid.reidit.data.model.Post
 import ca.rjreid.reidit.data.model.PostHolder
+import ca.rjreid.reidit.extensions.image
 import kotlinx.android.synthetic.main.list_item_post.view.*
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
@@ -44,9 +45,10 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     //region View Holder Inner Class
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bindPost(post: Post?) {
+            itemView.post_thumbnail.image(post?.thumbnailUrl ?: "")
             itemView.post_title.text = post?.title
             itemView.post_author.text = post?.author
-            itemView.post_subreddit.text = post?.subreddit
+            itemView.post_subreddit.text = "r/${post?.subreddit}"
             itemView.post_up_votes.text = post?.ups?.toString()
             itemView.post_down_votes.text = post?.downs?.toString()
             itemView.post_score.text = post?.score?.toString()
