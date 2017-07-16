@@ -1,12 +1,10 @@
 package ca.rjreid.reidit.ui.main
 
+import ca.rjreid.reidit.data.DataManager
 import ca.rjreid.reidit.data.model.PostsHolder
-import ca.rjreid.reidit.data.remote.RedditService
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
 
-class MainPresenter constructor(var delegate: MainDelegate, var redditService: RedditService) {
+class MainPresenter constructor(var delegate: MainDelegate, var dataManager: DataManager) {
     //region Variables
     private val compositeDisposable = CompositeDisposable()
     //endregion
@@ -15,14 +13,23 @@ class MainPresenter constructor(var delegate: MainDelegate, var redditService: R
     fun init() {
         delegate.initRecyclerView()
         delegate.initRefreshLayout()
+
         fetchFrontPage()
     }
 
     fun fetchFrontPage() {
-        redditService.fetchFrontPage()
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe { response -> displayPosts(response) }
+        dataManager
+                .fetchFrontPage()
+                .subscribe(
+                        {
+                            response ->
+                            displayPosts(response)
+                        },
+                        {
+                            error ->
+                            showError(error)
+                        }
+                )
     }
 
     fun refresh() {
@@ -38,6 +45,10 @@ class MainPresenter constructor(var delegate: MainDelegate, var redditService: R
     //region Helpers
     private fun displayPosts(response: PostsHolder) {
         delegate.updatePosts(response.postsData.postHolders)
+    }
+
+    private fun showError(throwable: Throwable) {
+        delegate.showError(throwable.localizedMessage)
     }
     //endregion
 }

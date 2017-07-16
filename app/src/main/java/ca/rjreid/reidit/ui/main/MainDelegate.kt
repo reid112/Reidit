@@ -8,5 +8,6 @@ interface MainDelegate : ViewDelegate {
     fun clearPosts()
     fun initRecyclerView()
     fun initRefreshLayout()
+    fun showError(localizedMessage: String?)
 
 }

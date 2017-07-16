@@ -1,6 +1,7 @@
 package ca.rjreid.reidit.ui.main
 
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -61,6 +62,10 @@ class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshL
 
     override fun clearPosts() {
         adapter.clearPosts()
+    }
+
+    override fun showError(localizedMessage: String?) {
+        Snackbar.make(refreshLayout, localizedMessage ?: "Oops, there seems to be a problem :(", Snackbar.LENGTH_LONG).show()
     }
     //endregion
 
