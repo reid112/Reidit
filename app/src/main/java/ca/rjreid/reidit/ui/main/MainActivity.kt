@@ -33,12 +33,17 @@ class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshL
         super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
         ButterKnife.bind(this)
-        presenter.init(savedInstanceState)
+        presenter.init()
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
         presenter.saveInstanceState(outState)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        presenter.restoreInstanceState(savedInstanceState)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -20,9 +20,7 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
     //endregion
 
     //region Commands
-    fun init(savedInstanceState: Bundle?) {
-        StateSaver.restoreInstanceState(this, savedInstanceState)
-
+    fun init() {
         delegate.initRecyclerView()
         delegate.initRefreshLayout()
 
@@ -33,6 +31,10 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
         if (outState != null) {
             StateSaver.saveInstanceState(this, outState)
         }
+    }
+
+    fun restoreInstanceState(savedInstanceState: Bundle?) {
+        StateSaver.restoreInstanceState(this, savedInstanceState)
     }
 
     fun fetchFrontPage(frontPageType: FrontPageTypes, timeFilter: TimeFilters) {
