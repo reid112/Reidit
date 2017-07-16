@@ -65,7 +65,7 @@ class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshL
     }
 
     override fun showError(localizedMessage: String?) {
-        Snackbar.make(refreshLayout, localizedMessage ?: "Oops, there seems to be a problem :(", Snackbar.LENGTH_LONG).show()
+        Snackbar.make(refreshLayout, "Oops, there seems to be a problem: $localizedMessage", Snackbar.LENGTH_LONG).show()
     }
     //endregion
 

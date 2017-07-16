@@ -1,7 +1,9 @@
 package ca.rjreid.reidit.ui.main
 
 import ca.rjreid.reidit.data.DataManager
+import ca.rjreid.reidit.data.model.FrontPageTypes
 import ca.rjreid.reidit.data.model.PostsHolder
+import ca.rjreid.reidit.data.model.TimeFilters
 import io.reactivex.disposables.CompositeDisposable
 
 class MainPresenter constructor(var delegate: MainDelegate, var dataManager: DataManager) {
@@ -19,7 +21,7 @@ class MainPresenter constructor(var delegate: MainDelegate, var dataManager: Dat
 
     fun fetchFrontPage() {
         dataManager
-                .fetchFrontPage()
+                .fetchFrontPage(FrontPageTypes.TOP, TimeFilters.DAY)
                 .subscribe(
                         {
                             response ->

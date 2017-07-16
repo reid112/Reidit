@@ -13,8 +13,8 @@ import javax.inject.Singleton
 
 @Singleton
 internal class DataManagerWrapper @Inject constructor(val redditService: RedditService) : DataManager {
-    override fun fetchFrontPage(): Observable<PostsHolder> {
-        return redditService.fetchFrontPage(FrontPageTypes.TOP, FrontPageTypes.TOP, TimeFilters.DAY)
+    override fun fetchFrontPage(frontPageType: FrontPageTypes, timeFilter: TimeFilters): Observable<PostsHolder> {
+        return redditService.fetchFrontPage(frontPageType, frontPageType, timeFilter)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
     }
