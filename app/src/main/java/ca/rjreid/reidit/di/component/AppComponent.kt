@@ -5,7 +5,6 @@ import ca.rjreid.reidit.App
 import ca.rjreid.reidit.di.module.ActivityBuilderModule
 import ca.rjreid.reidit.di.module.AppModule
 import ca.rjreid.reidit.di.module.DataModule
-import ca.rjreid.reidit.di.module.PicassoModule
 import dagger.BindsInstance
 import dagger.Component
 import dagger.android.AndroidInjectionModule
@@ -16,8 +15,7 @@ import javax.inject.Singleton
         AndroidInjectionModule::class,
         ActivityBuilderModule::class,
         AppModule::class,
-        DataModule::class,
-        PicassoModule::class
+        DataModule::class
 ))
 interface AppComponent {
 
