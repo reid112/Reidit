@@ -1,27 +1,46 @@
 package ca.rjreid.reidit.ui.main
 
+import android.os.Bundle
 import ca.rjreid.reidit.data.DataManager
 import ca.rjreid.reidit.data.model.FrontPageTypes
 import ca.rjreid.reidit.data.model.PostsHolder
 import ca.rjreid.reidit.data.model.TimeFilters
+import com.evernote.android.state.State
+import com.evernote.android.state.StateSaver
 import io.reactivex.disposables.CompositeDisposable
 
-class MainPresenter constructor(var delegate: MainDelegate, var dataManager: DataManager) {
+class MainPresenter constructor(private var delegate: MainDelegate, private var dataManager: DataManager) {
     //region Variables
-    private val compositeDisposable = CompositeDisposable()
+    val compositeDisposable = CompositeDisposable()
+    //endregion
+
+    //region State Variables
+    @State var currentFrontPageType = FrontPageTypes.TOP
+    @State var currentTimeFilter = TimeFilters.DAY
     //endregion
 
     //region Commands
-    fun init() {
+    fun init(savedInstanceState: Bundle?) {
+        StateSaver.restoreInstanceState(this, savedInstanceState)
+
         delegate.initRecyclerView()
         delegate.initRefreshLayout()
 
-        fetchFrontPage()
+        fetchFrontPage(currentFrontPageType, currentTimeFilter)
     }
 
-    fun fetchFrontPage() {
+    fun saveInstanceState(outState: Bundle?) {
+        if (outState != null) {
+            StateSaver.saveInstanceState(this, outState)
+        }
+    }
+
+    fun fetchFrontPage(frontPageType: FrontPageTypes, timeFilter: TimeFilters) {
+        currentFrontPageType = frontPageType
+        currentTimeFilter = timeFilter
+
         dataManager
-                .fetchFrontPage(FrontPageTypes.TOP, TimeFilters.DAY)
+                .fetchFrontPage(frontPageType, timeFilter)
                 .subscribe(
                         {
                             response ->
@@ -36,7 +55,7 @@ class MainPresenter constructor(var delegate: MainDelegate, var dataManager: Dat
 
     fun refresh() {
         delegate.clearPosts()
-        fetchFrontPage()
+        fetchFrontPage(currentFrontPageType, currentTimeFilter)
     }
 
     fun destroy() {
@@ -53,4 +72,6 @@ class MainPresenter constructor(var delegate: MainDelegate, var dataManager: Dat
         delegate.showError(throwable.localizedMessage)
     }
     //endregion
+
+
 }

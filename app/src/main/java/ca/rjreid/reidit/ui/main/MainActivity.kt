@@ -5,10 +5,14 @@ import android.support.design.widget.Snackbar
 import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.view.Menu
+import android.view.MenuItem
 import butterknife.BindView
 import butterknife.ButterKnife
 import ca.rjreid.reidit.R
+import ca.rjreid.reidit.data.model.FrontPageTypes
 import ca.rjreid.reidit.data.model.PostHolder
+import ca.rjreid.reidit.data.model.TimeFilters
 import ca.rjreid.reidit.ui.base.BaseActivity
 import dagger.android.AndroidInjection
 import javax.inject.Inject
@@ -29,20 +33,49 @@ class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshL
         super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
         ButterKnife.bind(this)
-        presenter.init()
+        presenter.init(savedInstanceState)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        presenter.saveInstanceState(outState)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.front_page_type, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        var frontPageType = FrontPageTypes.HOT
+        var timeFilter = TimeFilters.DAY
+
+        when (item?.itemId) {
+            R.id.front_page_type_hot -> {
+                frontPageType = FrontPageTypes.HOT
+            }
+            R.id.front_page_type_new -> {
+                frontPageType = FrontPageTypes.NEW
+            }
+            R.id.front_page_type_rising -> {
+                frontPageType = FrontPageTypes.RISING
+            }
+            R.id.front_page_type_controversial -> {
+                frontPageType = FrontPageTypes.CONTROVERSIAL
+            }
+            R.id.front_page_type_top -> {
+                frontPageType = FrontPageTypes.TOP
+            }
+        }
+
+        presenter.fetchFrontPage(frontPageType, timeFilter)
+        return true
     }
 
     override fun onDestroy() {
         super.onDestroy()
         presenter.destroy()
     }
-    //endregion
-
-    //region Click Listeners
-//    @OnClick(R.id.signin)
-//    internal fun signinButtonClicked() {
-//        presenter.fetchFrontPage()
-//    }
     //endregion
 
     //region View Delegate Implementation
