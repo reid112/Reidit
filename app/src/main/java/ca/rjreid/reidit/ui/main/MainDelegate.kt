@@ -6,8 +6,6 @@ import ca.rjreid.reidit.ui.base.ViewDelegate
 interface MainDelegate : ViewDelegate {
     fun updatePosts(postHolders: List<PostHolder>)
     fun clearPosts()
-    fun initRecyclerView()
-    fun initRefreshLayout()
     fun showError(localizedMessage: String?)
 
 }

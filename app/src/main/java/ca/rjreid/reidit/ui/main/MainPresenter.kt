@@ -21,9 +21,6 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
 
     //region Commands
     fun init() {
-        delegate.initRecyclerView()
-        delegate.initRefreshLayout()
-
         fetchFrontPage(currentFrontPageType, currentTimeFilter)
     }
 

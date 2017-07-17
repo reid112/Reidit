@@ -19,6 +19,16 @@ class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshL
     //region Variables
     @Inject lateinit var presenter: MainPresenter
     @Inject lateinit var adapter: MainAdapter
+
+    private val listView by lazy {
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView
+    }
+
+    private val refreshLayout by lazy {
+        swipeRefreshLayout.setOnRefreshListener(this)
+        swipeRefreshLayout
+    }
     //endregion
 
     //region Lifecycle
@@ -26,6 +36,8 @@ class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshL
         super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
         presenter.init()
+
+        listView.adapter = adapter
     }
 
     override fun onSaveInstanceState(outState: Bundle?) {
@@ -76,15 +88,6 @@ class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshL
     //endregion
 
     //region View Delegate Implementation
-    override fun initRecyclerView() {
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
-    }
-
-    override fun initRefreshLayout() {
-        refreshLayout.setOnRefreshListener(this)
-    }
-
     override fun updatePosts(postHolders: List<PostHolder>) {
         refreshLayout.isRefreshing = false
         adapter.updatePosts(postHolders)
