@@ -79,9 +79,10 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
 
-    // Butter Knife (https://github.com/JakeWharton/butterknife)
-    implementation 'com.jakewharton:butterknife:8.6.0'
-    kapt 'com.jakewharton:butterknife-compiler:8.6.0'
+//    Removing BK for now as I am doing view binding with kotlin-android-extensions... may want BK later for other bindings/click listeners
+//    // Butter Knife (https://github.com/JakeWharton/butterknife)
+//    implementation 'com.jakewharton:butterknife:8.6.0'
+//    kapt 'com.jakewharton:butterknife-compiler:8.6.0'
 
     // OK HTTP (https://github.com/square/okhttp)
     implementation 'com.squareup.okhttp3:okhttp:3.8.1'
