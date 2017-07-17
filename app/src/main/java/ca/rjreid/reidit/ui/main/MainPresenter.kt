@@ -44,14 +44,8 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
         dataManager
                 .fetchFrontPage(frontPageType, timeFilter)
                 .subscribe(
-                        {
-                            response ->
-                            displayPosts(response)
-                        },
-                        {
-                            error ->
-                            showError(error)
-                        }
+                        { displayPosts(it) },
+                        { showError(it) }
                 )
     }
 
