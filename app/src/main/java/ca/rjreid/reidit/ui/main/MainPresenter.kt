@@ -25,8 +25,8 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
     }
 
     fun saveInstanceState(outState: Bundle?) {
-        if (outState != null) {
-            StateSaver.saveInstanceState(this, outState)
+        outState?.let {
+            StateSaver.saveInstanceState(this, it)
         }
     }
 
