@@ -35,7 +35,7 @@ class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshL
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         AndroidInjection.inject(this)
-        presenter.init()
+        presenter.fetchFrontPage()
 
         listView.adapter = adapter
     }
@@ -98,7 +98,12 @@ class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshL
     }
 
     override fun showError(localizedMessage: String?) {
+        refreshLayout.isRefreshing = false
         Snackbar.make(refreshLayout, "Oops, there seems to be a problem: $localizedMessage", Snackbar.LENGTH_LONG).show()
+    }
+
+    override fun isRefreshing(isRefreshing: Boolean) {
+        refreshLayout.isRefreshing = isRefreshing
     }
     //endregion
 

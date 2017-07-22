@@ -7,5 +7,5 @@ interface MainDelegate : ViewDelegate {
     fun updatePosts(postHolders: List<PostHolder>)
     fun clearPosts()
     fun showError(localizedMessage: String?)
-
+    fun isRefreshing(isRefreshing: Boolean)
 }

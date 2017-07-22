@@ -52,14 +52,6 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
             itemView.postUpVotes.text = post?.ups?.toString()
             itemView.postDownVotes.text = post?.downs?.toString()
             itemView.postComments.text = post?.score?.toString()
-
-            initializeClickHandlers()
-        }
-
-        private fun initializeClickHandlers() {
-            itemView.setOnClickListener { view ->
-
-            }
         }
     }
     //endregion

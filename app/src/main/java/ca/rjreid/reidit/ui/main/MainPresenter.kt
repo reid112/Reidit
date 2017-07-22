@@ -20,10 +20,6 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
     //endregion
 
     //region Commands
-    fun init() {
-        fetchFrontPage(currentFrontPageType, currentTimeFilter)
-    }
-
     fun saveInstanceState(outState: Bundle?) {
         outState?.let {
             StateSaver.saveInstanceState(this, it)
@@ -34,9 +30,15 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
         StateSaver.restoreInstanceState(this, savedInstanceState)
     }
 
+    fun fetchFrontPage() {
+        fetchFrontPage(currentFrontPageType, currentTimeFilter)
+    }
+
     fun fetchFrontPage(frontPageType: FrontPageTypes, timeFilter: TimeFilters) {
         currentFrontPageType = frontPageType
         currentTimeFilter = timeFilter
+
+        delegate.isRefreshing(true)
 
         dataManager
                 .fetchFrontPage(frontPageType, timeFilter)
