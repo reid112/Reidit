@@ -45,13 +45,21 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     //region View Holder Inner Class
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bindPost(post: Post?) {
-            itemView.post_thumbnail.image(post?.thumbnailUrl ?: "")
-            itemView.post_title.text = post?.title
-            itemView.post_author.text = post?.author
-            itemView.post_subreddit.text = "r/${post?.subreddit}"
-            itemView.post_up_votes.text = post?.ups?.toString()
-            itemView.post_down_votes.text = post?.downs?.toString()
-            itemView.post_score.text = post?.score?.toString()
+            itemView.postThumbnail.image(post?.thumbnailUrl ?: "")
+            itemView.postSubreddit.text = String.format(itemView.context.getString(R.string.label_subreddit), post?.subreddit)
+            itemView.postTitle.text = post?.title
+            itemView.postAuthor.text = post?.author
+            itemView.postUpVotes.text = post?.ups?.toString()
+            itemView.postDownVotes.text = post?.downs?.toString()
+            itemView.postComments.text = post?.score?.toString()
+
+            initializeClickHandlers()
+        }
+
+        private fun initializeClickHandlers() {
+            itemView.setOnClickListener { view ->
+
+            }
         }
     }
     //endregion

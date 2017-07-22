@@ -9,5 +9,7 @@
     <string name="menu_controversial">Controversial</string>
     <string name="menu_top">Top</string>
 
+    <!-- Labels -->
+    <string name="label_subreddit">r/%s</string>
 
 </resources>
