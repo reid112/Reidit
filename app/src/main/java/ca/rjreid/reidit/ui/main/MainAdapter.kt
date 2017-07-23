@@ -61,7 +61,7 @@ class MainAdapter(
                 itemView.postAuthor.text = author
                 itemView.postUpVotes.text = ups.toString()
                 itemView.postDownVotes.text = downs.toString()
-                itemView.postComments.text = score.toString()
+                itemView.postComments.text = numComments.toString()
 
                 itemView.setOnClickListener { postClick(this) }
                 itemView.postUpVotes.setOnClickListener { upVoteClick(this) }
