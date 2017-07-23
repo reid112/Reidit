@@ -72,7 +72,10 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
 
     // RxBindings (https://github.com/JakeWharton/RxBinding)
-    implementation 'com.jakewharton.rxbinding2:rxbinding:2.0.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:2.0.0'
+    compile 'com.jakewharton.rxbinding2:rxbinding-design-kotlin:2.0.0'
 
     // Retrofit (https://github.com/square/retrofit)
     implementation ('com.squareup.retrofit2:retrofit:2.3.0') {

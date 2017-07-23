@@ -16,9 +16,4 @@ class MainActivityModule {
     internal fun provideMainPresenter(mainView: MainDelegate, dataManager: DataManager): MainPresenter {
         return MainPresenter(mainView, dataManager)
     }
-
-    @Provides
-    internal fun provideMainAdapter(): MainAdapter {
-        return MainAdapter()
-    }
 }

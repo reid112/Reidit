@@ -6,8 +6,10 @@ import android.support.v4.widget.SwipeRefreshLayout
 import android.support.v7.widget.LinearLayoutManager
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import ca.rjreid.reidit.R
 import ca.rjreid.reidit.data.model.FrontPageTypes
+import ca.rjreid.reidit.data.model.Post
 import ca.rjreid.reidit.data.model.PostHolder
 import ca.rjreid.reidit.data.model.TimeFilters
 import ca.rjreid.reidit.ui.base.BaseActivity
@@ -18,7 +20,12 @@ import javax.inject.Inject
 class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshListener {
     //region Variables
     @Inject lateinit var presenter: MainPresenter
-    @Inject lateinit var adapter: MainAdapter
+
+    var adapter: MainAdapter = MainAdapter(
+            { post -> presenter.postClick(post) },
+            { post -> presenter.upVoteClick(post) },
+            { post -> presenter.downVoteClick(post) },
+            { post -> presenter.commentClick(post) })
 
     private val listView by lazy {
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -104,6 +111,14 @@ class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshL
 
     override fun isRefreshing(isRefreshing: Boolean) {
         refreshLayout.isRefreshing = isRefreshing
+    }
+
+    override fun showPostDetails(post: Post) {
+        Toast.makeText(this, "Post: " + post.title, Toast.LENGTH_LONG).show()
+    }
+
+    override fun showPostComments(post: Post) {
+        Toast.makeText(this, "Comments: " + post.numComments, Toast.LENGTH_LONG).show()
     }
     //endregion
 

@@ -3,6 +3,7 @@ package ca.rjreid.reidit.ui.main
 import android.os.Bundle
 import ca.rjreid.reidit.data.DataManager
 import ca.rjreid.reidit.data.model.FrontPageTypes
+import ca.rjreid.reidit.data.model.Post
 import ca.rjreid.reidit.data.model.PostsHolder
 import ca.rjreid.reidit.data.model.TimeFilters
 import com.evernote.android.state.State
@@ -53,19 +54,35 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
         fetchFrontPage(currentFrontPageType, currentTimeFilter)
     }
 
-    fun destroy() {
+    fun destroy() =
         compositeDisposable.clear()
+    //endregion
+
+    //region Click Helpers
+    fun postClick(post: Post) =
+            delegate.showPostDetails(post)
+
+    fun upVoteClick(post: Post) {
+
     }
+
+    fun downVoteClick(post: Post) {
+
+    }
+
+
+    fun commentClick(post: Post) =
+            delegate.showPostComments(post)
+
     //endregion
 
     //region Helpers
-    private fun displayPosts(response: PostsHolder) {
+    private fun displayPosts(response: PostsHolder) =
         delegate.updatePosts(response.postsData.postHolders)
-    }
 
-    private fun showError(throwable: Throwable) {
+
+    private fun showError(throwable: Throwable) =
         delegate.showError(throwable.localizedMessage)
-    }
     //endregion
 
 

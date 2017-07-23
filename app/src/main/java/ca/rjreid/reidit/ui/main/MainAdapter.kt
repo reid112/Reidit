@@ -10,7 +10,11 @@ import ca.rjreid.reidit.data.model.PostHolder
 import ca.rjreid.reidit.extensions.image
 import kotlinx.android.synthetic.main.list_item_post.view.*
 
-class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+class MainAdapter(
+        val postClick: (Post) -> Unit,
+        val upVoteClick: (Post) -> Unit,
+        val downVoteClick: (Post) -> Unit,
+        val commentsClick: (Post) -> Unit) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     //region Variables
     private var postHolders: List<PostHolder>? = null
     //endregion
@@ -18,11 +22,11 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     //region Adapter Implementation
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent?.context).inflate(R.layout.list_item_post, parent, false)
-        return ViewHolder(view)
+        return ViewHolder(view, postClick, upVoteClick, downVoteClick, commentsClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        holder?.bindPost(postHolders?.get(position)?.post)
+        postHolders?.let { holder?.bindPost(it[position].post) }
     }
 
     override fun getItemCount(): Int {
@@ -43,15 +47,27 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     //endregion
 
     //region View Holder Inner Class
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bindPost(post: Post?) {
-            itemView.postThumbnail.image(post?.thumbnailUrl ?: "")
-            itemView.postSubreddit.text = String.format(itemView.context.getString(R.string.label_subreddit), post?.subreddit)
-            itemView.postTitle.text = post?.title
-            itemView.postAuthor.text = post?.author
-            itemView.postUpVotes.text = post?.ups?.toString()
-            itemView.postDownVotes.text = post?.downs?.toString()
-            itemView.postComments.text = post?.score?.toString()
+    class ViewHolder(
+            view: View,
+            val postClick: (Post) -> Unit,
+            val upVoteClick: (Post) -> Unit,
+            val downVoteClick: (Post) -> Unit,
+            val commentsClick: (Post) -> Unit) : RecyclerView.ViewHolder(view) {
+        fun bindPost(post: Post) {
+            with(post) {
+                itemView.postThumbnail.image(thumbnailUrl ?: "")
+                itemView.postSubreddit.text = String.format(itemView.context.getString(R.string.label_subreddit), subreddit)
+                itemView.postTitle.text = title
+                itemView.postAuthor.text = author
+                itemView.postUpVotes.text = ups.toString()
+                itemView.postDownVotes.text = downs.toString()
+                itemView.postComments.text = score.toString()
+
+                itemView.setOnClickListener { postClick(this) }
+                itemView.postUpVotes.setOnClickListener { upVoteClick(this) }
+                itemView.postDownVotes.setOnClickListener { downVoteClick(this) }
+                itemView.postComments.setOnClickListener { commentsClick(this) }
+            }
         }
     }
     //endregion
