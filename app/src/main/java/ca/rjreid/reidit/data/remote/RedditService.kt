@@ -14,5 +14,6 @@ interface RedditService {
     @GET("{frontPageType}.json")
     fun fetchFrontPage(@Path("frontPageType") frontPageType: FrontPageTypes,
                        @Query("sort") sort: FrontPageTypes,
-                       @Query("t") time: TimeFilters): Observable<PostsHolder>
+                       @Query("t") time: TimeFilters,
+                       @Query("after") after: String): Observable<PostsHolder>
 }

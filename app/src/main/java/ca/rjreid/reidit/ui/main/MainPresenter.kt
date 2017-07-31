@@ -16,6 +16,7 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
     //endregion
 
     //region State Variables
+    @State var after: String = ""
     @State var currentFrontPageType = FrontPageTypes.TOP
     @State var currentTimeFilter = TimeFilters.DAY
     //endregion
@@ -39,10 +40,8 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
         currentFrontPageType = frontPageType
         currentTimeFilter = timeFilter
 
-        delegate.isRefreshing(true)
-
         dataManager
-                .fetchFrontPage(frontPageType, timeFilter)
+                .fetchFrontPage(frontPageType, timeFilter, after)
                 .subscribe(
                         { displayPosts(it) },
                         { showError(it) }
@@ -50,7 +49,9 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
     }
 
     fun refresh() {
+        delegate.isRefreshing(true)
         delegate.clearPosts()
+        after = ""
         fetchFrontPage(currentFrontPageType, currentTimeFilter)
     }
 
@@ -77,8 +78,10 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
     //endregion
 
     //region Helpers
-    private fun displayPosts(response: PostsHolder) =
+    private fun displayPosts(response: PostsHolder) {
+        after = response.postsData.after ?: ""
         delegate.updatePosts(response.postsData.postHolders)
+    }
 
 
     private fun showError(throwable: Throwable) =

@@ -28,7 +28,11 @@ class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshL
             { post -> presenter.commentClick(post) })
 
     private val listView by lazy {
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        val layoutManager = LinearLayoutManager(this)
+        recyclerView.layoutManager = layoutManager
+        recyclerView.addOnScrollListener(InfiniteScrollListener(layoutManager) {
+            presenter.fetchFrontPage()
+        })
         recyclerView
     }
 
@@ -97,7 +101,7 @@ class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshL
     //region View Delegate Implementation
     override fun updatePosts(postHolders: List<PostHolder>) {
         refreshLayout.isRefreshing = false
-        adapter.updatePosts(postHolders)
+        adapter.appendNewPosts(postHolders)
     }
 
     override fun clearPosts() {

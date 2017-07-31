@@ -16,7 +16,7 @@ class MainAdapter(
         val downVoteClick: (Post) -> Unit,
         val commentsClick: (Post) -> Unit) : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
     //region Variables
-    private var postHolders: List<PostHolder>? = null
+    private var postHolders = mutableListOf<PostHolder>()
     //endregion
 
     //region Adapter Implementation
@@ -26,22 +26,27 @@ class MainAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
-        postHolders?.let { holder?.bindPost(it[position].post) }
+        holder?.bindPost(postHolders[position].post)
     }
 
     override fun getItemCount(): Int {
-        return postHolders?.count() ?: 0
+        return postHolders.count()
     }
     //endregion
 
     //region Commands
-    fun updatePosts(postHolders: List<PostHolder>) {
-        this.postHolders = postHolders
+    fun replacePosts(postHolders: List<PostHolder>) {
+        clearPosts()
+        appendNewPosts(postHolders)
+    }
+
+    fun appendNewPosts(postHolders: List<PostHolder>) {
+        this.postHolders.addAll(postHolders)
         notifyDataSetChanged()
     }
 
     fun clearPosts() {
-        this.postHolders = null
+        this.postHolders.clear()
         notifyDataSetChanged()
     }
     //endregion

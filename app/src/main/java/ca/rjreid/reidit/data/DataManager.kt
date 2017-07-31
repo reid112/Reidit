@@ -7,5 +7,5 @@ import io.reactivex.Observable
 
 
 interface DataManager {
-    fun fetchFrontPage(frontPageType: FrontPageTypes, timeFilter: TimeFilters): Observable<PostsHolder>
+    fun fetchFrontPage(frontPageType: FrontPageTypes, timeFilter: TimeFilters, after: String): Observable<PostsHolder>
 }
