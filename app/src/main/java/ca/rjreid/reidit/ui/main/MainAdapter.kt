@@ -60,7 +60,7 @@ class MainAdapter(
             val commentsClick: (Post) -> Unit) : RecyclerView.ViewHolder(view) {
         fun bindPost(post: Post) {
             with(post) {
-                itemView.postThumbnail.image(thumbnailUrl ?: "")
+                itemView.postThumbnail.image(thumbnailUrl)
                 itemView.postSubreddit.text = String.format(itemView.context.getString(R.string.label_subreddit), subreddit)
                 itemView.postTitle.text = title
                 itemView.postAuthor.text = author
