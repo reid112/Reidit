@@ -1,7 +1,4 @@
 <resources>
-    <!-- Application Strings -->
-    <string name="app_name">Reidit</string>
-
     <!-- Menus -->
     <string name="menu_hot">Hot</string>
     <string name="menu_new">New</string>

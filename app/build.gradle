@@ -7,6 +7,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 26
     buildToolsVersion "26.0.0"
+    flavorDimensions "default"
 
     defaultConfig {
         applicationId "ca.rjreid.reidit"
@@ -23,6 +24,32 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    productFlavors {
+        inStore {
+            dimension "default"
+            applicationId "ca.rjreid.reidit"
+            resValue "string", "app_name", "ReidIt"
+        }
+
+        demoProd {
+            dimension "default"
+            applicationId "ca.rjreid.reidit.demoprod"
+            resValue "string", "app_name", "ReidIt Demo Prod"
+        }
+
+        demoTest {
+            dimension "default"
+            applicationId "ca.rjreid.reidit.demotest"
+            resValue "string", "app_name", "ReidIt Demo Test"
+        }
+
+        mock {
+            dimension "default"
+            applicationId "ca.rjreid.reidit.mock"
+            resValue "string", "app_name", "ReidIt Mock"
         }
     }
 
@@ -59,7 +86,7 @@ dependencies {
     implementation "com.android.support.constraint:constraint-layout:1.0.2"
 
     // Mockito (http://site.mockito.org/)
-    testImplementation 'org.mockito:mockito-core:2.7.13'
+    testImplementation 'org.mockito:mockito-core:2.8.47'
 
     // JUnit (http://junit.org/junit4/)
     testImplementation 'junit:junit:4.12'
@@ -69,7 +96,7 @@ dependencies {
 
     // RxJava/RxAndroid (https://github.com/ReactiveX/RxAndroid)
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.0'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.1'
 
     // RxBindings (https://github.com/JakeWharton/RxBinding)
     implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0'
@@ -106,8 +133,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.1'
 
     // Evernote Android State (https://github.com/evernote/android-state)
-    implementation 'com.evernote:android-state:1.1.1'
-    kapt 'com.evernote:android-state-processor:1.1.1'
+    implementation 'com.evernote:android-state:1.1.3'
+    kapt 'com.evernote:android-state-processor:1.1.3'
 
     // Dagger (https://github.com/google/dagger)
     implementation 'com.google.dagger:dagger:2.11'
