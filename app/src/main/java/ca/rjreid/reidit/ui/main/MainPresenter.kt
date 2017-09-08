@@ -10,7 +10,7 @@ import com.evernote.android.state.State
 import com.evernote.android.state.StateSaver
 import io.reactivex.disposables.CompositeDisposable
 
-class MainPresenter constructor(private var delegate: MainDelegate, private var dataManager: DataManager) {
+class MainPresenter constructor(private var view: MainView, private var dataManager: DataManager) {
     //region Variables
     val compositeDisposable = CompositeDisposable()
     //endregion
@@ -49,8 +49,8 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
     }
 
     fun refresh() {
-        delegate.isRefreshing(true)
-        delegate.clearPosts()
+        view.isRefreshing(true)
+        view.clearPosts()
         after = ""
         fetchFrontPage(currentFrontPageType, currentTimeFilter)
     }
@@ -61,7 +61,7 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
 
     //region Click Helpers
     fun postClick(post: Post) =
-            delegate.showPostDetails(post)
+            view.showPostDetails(post)
 
     fun upVoteClick(post: Post) {
 
@@ -73,19 +73,19 @@ class MainPresenter constructor(private var delegate: MainDelegate, private var 
 
 
     fun commentClick(post: Post) =
-            delegate.showPostComments(post)
+            view.showPostComments(post)
 
     //endregion
 
     //region Helpers
     private fun displayPosts(response: PostsHolder) {
         after = response.postsData.after ?: ""
-        delegate.updatePosts(response.postsData.postHolders)
+        view.updatePosts(response.postsData.postHolders)
     }
 
 
     private fun showError(throwable: Throwable) =
-        delegate.showError(throwable.localizedMessage)
+            view.showError(throwable.localizedMessage)
     //endregion
 
 

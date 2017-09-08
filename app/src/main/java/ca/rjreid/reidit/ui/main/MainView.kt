@@ -2,9 +2,9 @@ package ca.rjreid.reidit.ui.main
 
 import ca.rjreid.reidit.data.model.Post
 import ca.rjreid.reidit.data.model.PostHolder
-import ca.rjreid.reidit.ui.base.ViewDelegate
+import ca.rjreid.reidit.ui.base.BaseView
 
-interface MainDelegate : ViewDelegate {
+interface MainView : BaseView {
     fun updatePosts(postHolders: List<PostHolder>)
     fun clearPosts()
     fun showError(localizedMessage: String?)

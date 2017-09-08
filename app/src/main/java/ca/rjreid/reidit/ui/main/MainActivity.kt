@@ -17,7 +17,7 @@ import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : BaseActivity(), MainDelegate, SwipeRefreshLayout.OnRefreshListener {
+class MainActivity : BaseActivity(), MainView, SwipeRefreshLayout.OnRefreshListener {
     //region Variables
     @Inject lateinit var presenter: MainPresenter
 

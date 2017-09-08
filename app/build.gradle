@@ -28,28 +28,16 @@ android {
     }
 
     productFlavors {
-        inStore {
+        Store {
             dimension "default"
             applicationId "ca.rjreid.reidit"
             resValue "string", "app_name", "ReidIt"
         }
 
-        demoProd {
+        Test {
             dimension "default"
-            applicationId "ca.rjreid.reidit.demoprod"
-            resValue "string", "app_name", "ReidIt Demo Prod"
-        }
-
-        demoTest {
-            dimension "default"
-            applicationId "ca.rjreid.reidit.demotest"
-            resValue "string", "app_name", "ReidIt Demo Test"
-        }
-
-        mock {
-            dimension "default"
-            applicationId "ca.rjreid.reidit.mock"
-            resValue "string", "app_name", "ReidIt Mock"
+            applicationId "ca.rjreid.reidit.test"
+            resValue "string", "app_name", "ReidIt Test"
         }
     }
 
