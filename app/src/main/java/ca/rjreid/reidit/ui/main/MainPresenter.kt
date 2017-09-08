@@ -71,7 +71,6 @@ class MainPresenter constructor(private var view: MainView, private var dataMana
 
     }
 
-
     fun commentClick(post: Post) =
             view.showPostComments(post)
 
