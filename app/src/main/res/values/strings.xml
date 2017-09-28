@@ -1,6 +1,12 @@
 <resources>
-    <string name="app_name">Reidit</string>
-    <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <!-- Menus -->
+    <string name="menu_hot">Hot</string>
+    <string name="menu_new">New</string>
+    <string name="menu_rising">Rising</string>
+    <string name="menu_controversial">Controversial</string>
+    <string name="menu_top">Top</string>
+
+    <!-- Labels -->
+    <string name="label_subreddit">r/%s</string>
+
 </resources>
