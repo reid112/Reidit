@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:background="@color/white"
+    android:paddingStart="@dimen/activity_horizontal_margin"
+    android:paddingEnd="@dimen/activity_horizontal_margin"
+    android:paddingTop="5dp"
+    android:paddingBottom="5dp"
+    android:layout_marginBottom="10dp">
+
+    <ImageView
+        android:id="@+id/postThumbnail"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        tools:src="@drawable/ic_home_black_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/postTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/postThumbnail"
+        tools:text="Post Title" />
+
+    <TextView
+        android:id="@+id/postAuthor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:textSize="12sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintTop_toBottomOf="@+id/postTitle"
+        app:layout_constraintStart_toEndOf="@+id/postThumbnail"
+        tools:text="Post Author" />
+
+    <TextView
+        android:id="@+id/postSubreddit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:layout_marginStart="8dp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintTop_toBottomOf="@+id/postAuthor"
+        app:layout_constraintStart_toEndOf="@+id/postThumbnail"
+        tools:text="Subreddit Name" />
+
+    <TextView
+        android:id="@+id/postUpVotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/ic_arrow_up"
+        android:gravity="center_vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postThumbnail"
+        tools:text="1234" />
+
+    <TextView
+        android:id="@+id/postDownVotes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/ic_arrow_down"
+        android:gravity="center_vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/postThumbnail"
+        app:layout_constraintStart_toEndOf="@+id/postUpVotes"
+        tools:text="230" />
+
+    <TextView
+        android:id="@+id/postComments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawableStart="@drawable/ic_comment"
+        android:drawablePadding="5dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@+id/postThumbnail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="301"/>
+
+</android.support.constraint.ConstraintLayout>
