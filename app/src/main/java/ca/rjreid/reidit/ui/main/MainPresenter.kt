@@ -12,7 +12,7 @@ import io.reactivex.disposables.CompositeDisposable
 
 class MainPresenter constructor(private var view: MainView, private var dataManager: DataManager) {
     //region Variables
-    val compositeDisposable = CompositeDisposable()
+    private val compositeDisposable = CompositeDisposable()
     //endregion
 
     //region State Variables
@@ -40,12 +40,13 @@ class MainPresenter constructor(private var view: MainView, private var dataMana
         currentFrontPageType = frontPageType
         currentTimeFilter = timeFilter
 
-        dataManager
-                .fetchFrontPage(frontPageType, timeFilter, after)
-                .subscribe(
-                        { displayPosts(it) },
-                        { showError(it) }
-                )
+        compositeDisposable.add(
+                dataManager
+                        .fetchFrontPage(frontPageType, timeFilter, after)
+                        .subscribe(
+                                { displayPosts(it) },
+                                { showError(it) }
+                        ))
     }
 
     fun refresh() {
@@ -55,13 +56,11 @@ class MainPresenter constructor(private var view: MainView, private var dataMana
         fetchFrontPage(currentFrontPageType, currentTimeFilter)
     }
 
-    fun destroy() =
-        compositeDisposable.clear()
+    fun destroy() = compositeDisposable.clear()
     //endregion
 
     //region Click Helpers
-    fun postClick(post: Post) =
-            view.showPostDetails(post)
+    fun postClick(post: Post) = view.showPostDetails(post)
 
     fun upVoteClick(post: Post) {
 
@@ -71,9 +70,7 @@ class MainPresenter constructor(private var view: MainView, private var dataMana
 
     }
 
-    fun commentClick(post: Post) =
-            view.showPostComments(post)
-
+    fun commentClick(post: Post) = view.showPostComments(post)
     //endregion
 
     //region Helpers
@@ -83,8 +80,7 @@ class MainPresenter constructor(private var view: MainView, private var dataMana
     }
 
 
-    private fun showError(throwable: Throwable) =
-            view.showError(throwable.localizedMessage)
+    private fun showError(throwable: Throwable) = view.showError(throwable.localizedMessage)
     //endregion
 
 
