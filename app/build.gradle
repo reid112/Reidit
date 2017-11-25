@@ -115,10 +115,18 @@ dependencies {
     // GSON (https://github.com/google/gson)
     implementation 'com.google.code.gson:gson:2.8.1'
 
+    // Evernote Android State (https://github.com/evernote/android-state)
+    // Want to remove this eventually and just use view models
+    implementation 'com.evernote:android-state:1.1.3'
+    kapt 'com.evernote:android-state-processor:1.1.3'
+
     // Dagger (https://github.com/google/dagger)
     implementation 'com.google.dagger:dagger:2.11'
     kapt 'com.google.dagger:dagger-compiler:2.11'
     implementation 'com.google.dagger:dagger-android-support:2.11'
+
+    // SQLBrite (https://github.com/square/sqlbrite)
+    implementation 'com.squareup.sqlbrite:sqlbrite:1.1.2'
 
     // Timber (https://github.com/JakeWharton/timber)
     implementation 'com.jakewharton.timber:timber:4.5.1'
