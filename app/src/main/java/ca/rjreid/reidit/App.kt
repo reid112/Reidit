@@ -19,7 +19,7 @@ class App : Application(), HasActivityInjector {
         initializeDagger()
     }
 
-    fun initializeDagger() {
+    private fun initializeDagger() {
         DaggerAppComponent
                 .builder()
                 .application(this)
