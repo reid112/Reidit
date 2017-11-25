@@ -12,8 +12,12 @@ fun ImageView.image(url: String) =
                 .error(R.drawable.error_placeholder)
                 .into(this)
 
-fun View.hide() {
+fun View.gone() {
     this.visibility = View.GONE
+}
+
+fun View.invisible() {
+    this.visibility = View.INVISIBLE
 }
 
 fun View.show() {
