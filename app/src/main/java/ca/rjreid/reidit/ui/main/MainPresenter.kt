@@ -9,8 +9,9 @@ import ca.rjreid.reidit.data.model.TimeFilters
 import com.evernote.android.state.State
 import com.evernote.android.state.StateSaver
 import io.reactivex.disposables.CompositeDisposable
+import javax.inject.Inject
 
-class MainPresenter constructor(private var view: MainView, private var dataManager: DataManager) {
+class MainPresenter @Inject constructor(private var view: MainView, private var dataManager: DataManager) {
     //region Variables
     private val compositeDisposable = CompositeDisposable()
     //endregion

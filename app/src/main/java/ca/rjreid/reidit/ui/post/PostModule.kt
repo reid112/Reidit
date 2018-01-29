@@ -1,12 +1,12 @@
-package ca.rjreid.reidit.ui.main
+package ca.rjreid.reidit.ui.post
 
 import ca.rjreid.reidit.di.scope.ActivityScope
 import dagger.Module
 import dagger.Provides
 
 @Module
-class MainActivityModule {
+class PostModule {
     @Provides
     @ActivityScope
-    fun provideMainView(activity: MainActivity): MainView = activity
+    fun providePostView(activity: PostActivity): PostView = activity
 }
