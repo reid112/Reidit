@@ -13,6 +13,7 @@ import ca.rjreid.reidit.data.model.Post
 import ca.rjreid.reidit.data.model.PostHolder
 import ca.rjreid.reidit.data.model.TimeFilters
 import ca.rjreid.reidit.ui.base.BaseActivity
+import ca.rjreid.reidit.ui.post.PostActivity
 import dagger.android.AndroidInjection
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -45,7 +46,6 @@ class MainActivity : BaseActivity(), MainView, SwipeRefreshLayout.OnRefreshListe
     //region Lifecycle
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        AndroidInjection.inject(this)
         presenter.fetchFrontPage()
 
         listView.adapter = adapter
@@ -118,7 +118,7 @@ class MainActivity : BaseActivity(), MainView, SwipeRefreshLayout.OnRefreshListe
     }
 
     override fun showPostDetails(post: Post) {
-        Toast.makeText(this, "Post: " + post.title, Toast.LENGTH_LONG).show()
+        startActivity(PostActivity.createIntent(this))
     }
 
     override fun showPostComments(post: Post) {

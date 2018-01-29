@@ -5,14 +5,14 @@ apply plugin: 'kotlin-kapt'
 
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.0"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     flavorDimensions "default"
 
     defaultConfig {
         applicationId "ca.rjreid.reidit"
-        minSdkVersion 19
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -21,9 +21,17 @@ android {
     }
 
     buildTypes {
-        release {
+        debug {
             minifyEnabled false
+            // Uses new built-in shrinker http://tools.android.com/tech-docs/new-build-system/built-in-shrinker
+            useProguard false
+        }
+
+        release {
+            minifyEnabled true
+            useProguard true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
     }
 
@@ -53,86 +61,85 @@ kapt {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    // Espresso
-    androidTestImplementation ('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$KOTLIN_VERSION"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 
     // Android
-    implementation "com.android.support:support-compat:$SUPPORT_LIB_VERSION"
-    implementation "com.android.support:support-core-ui:$SUPPORT_LIB_VERSION"
-    implementation "com.android.support:support-annotations:$SUPPORT_LIB_VERSION"
-    implementation "com.android.support:support-fragment:$SUPPORT_LIB_VERSION"
-    implementation "com.android.support:support-media-compat:$SUPPORT_LIB_VERSION"
-    implementation "com.android.support:appcompat-v7:$SUPPORT_LIB_VERSION"
-    implementation "com.android.support:design:$SUPPORT_LIB_VERSION"
-    implementation "com.android.support:support-vector-drawable:$SUPPORT_LIB_VERSION"
-    implementation "com.android.support:multidex:1.0.2"
-    implementation "com.android.support.constraint:constraint-layout:1.0.2"
+    implementation "com.android.support:support-compat:$supportLibraryVersion"
+    implementation "com.android.support:support-core-ui:$supportLibraryVersion"
+    implementation "com.android.support:support-annotations:$supportLibraryVersion"
+    implementation "com.android.support:support-fragment:$supportLibraryVersion"
+    implementation "com.android.support:support-media-compat:$supportLibraryVersion"
+    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+    implementation "com.android.support:design:$supportLibraryVersion"
+    implementation "com.android.support:support-vector-drawable:$supportLibraryVersion"
+    implementation "com.android.support:multidex:$multidexVersion"
+    implementation "com.android.support.constraint:constraint-layout:$constraintLayoutVersion"
 
     // Mockito (http://site.mockito.org/)
-    testImplementation 'org.mockito:mockito-core:2.8.47'
+    testImplementation "org.mockito:mockito-core:$mockitoVersion"
 
     // JUnit (http://junit.org/junit4/)
-    testImplementation 'junit:junit:4.12'
+    testImplementation "junit:junit:$junitVersion"
 
     // Robolectric (http://robolectric.org/)
-    testImplementation 'org.robolectric:robolectric:3.3.2'
+    testImplementation "org.robolectric:robolectric:$roboelectricVersion"
 
     // RxJava/RxAndroid (https://github.com/ReactiveX/RxAndroid)
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.1'
+    implementation "io.reactivex.rxjava2:rxandroid:$rxAndroidVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
 
     // RxBindings (https://github.com/JakeWharton/RxBinding)
-    implementation 'com.jakewharton.rxbinding2:rxbinding-kotlin:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:2.0.0'
-    compile 'com.jakewharton.rxbinding2:rxbinding-design-kotlin:2.0.0'
+    implementation "com.jakewharton.rxbinding2:rxbinding-kotlin:$rxBindingsVersion"
+    compile "com.jakewharton.rxbinding2:rxbinding-support-v4-kotlin:$rxBindingsVersion"
+    compile "com.jakewharton.rxbinding2:rxbinding-appcompat-v7-kotlin:$rxBindingsVersion"
+    compile "com.jakewharton.rxbinding2:rxbinding-design-kotlin:$rxBindingsVersion"
 
     // Retrofit (https://github.com/square/retrofit)
-    implementation ('com.squareup.retrofit2:retrofit:2.3.0') {
+    implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion") {
         // exclude Retrofit’s OkHttp peer-dependency module and define your own module import
         exclude module: 'okhttp'
     }
-    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-
-//    Removing BK for now as I am doing view binding with kotlin-android-extensions... may want BK later for other bindings/click listeners
-//    // Butter Knife (https://github.com/JakeWharton/butterknife)
-//    implementation 'com.jakewharton:butterknife:8.6.0'
-//    kapt 'com.jakewharton:butterknife-compiler:8.6.0'
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
 
     // OK HTTP (https://github.com/square/okhttp)
-    implementation 'com.squareup.okhttp3:okhttp:3.8.1'
-    testImplementation 'com.squareup.okhttp3:mockwebserver:3.8.1'
-    implementation 'com.squareup.okhttp3:logging-interceptor:3.6.0'
+    implementation "com.squareup.okhttp3:okhttp:$okhtttpVersion"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpMockWebserverVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingInterceptorVersion"
 
     // Picasso (https://github.com/square/picasso)
-    implementation 'com.squareup.picasso:picasso:2.5.2'
+    implementation "com.squareup.picasso:picasso:$picassoVersion"
 
     // Event Bus (https://github.com/greenrobot/EventBus)
-    implementation 'org.greenrobot:eventbus:3.0.0'
-    kapt 'org.greenrobot:eventbus-annotation-processor:3.0.1'
+    implementation "org.greenrobot:eventbus:$eventBusVersion"
+    kapt "org.greenrobot:eventbus-annotation-processor:$eventBusAnnotationProcessorVersion"
 
     // GSON (https://github.com/google/gson)
-    implementation 'com.google.code.gson:gson:2.8.1'
+    implementation "com.google.code.gson:gson:$gsonVersion"
 
     // Evernote Android State (https://github.com/evernote/android-state)
-    implementation 'com.evernote:android-state:1.1.3'
-    kapt 'com.evernote:android-state-processor:1.1.3'
-
-    // Dagger (https://github.com/google/dagger)
-    implementation 'com.google.dagger:dagger:2.11'
-    kapt 'com.google.dagger:dagger-compiler:2.11'
-    implementation 'com.google.dagger:dagger-android-support:2.11'
-
-    // SQLBrite (https://github.com/square/sqlbrite)
-    implementation 'com.squareup.sqlbrite:sqlbrite:1.1.2'
+    // Want to remove this eventually and just use view models
+    implementation "com.evernote:android-state:$evernoteVersion"
+    kapt "com.evernote:android-state-processor:$evernoteVersion"
 
     // Timber (https://github.com/JakeWharton/timber)
-    implementation 'com.jakewharton.timber:timber:4.5.1'
+    implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    // Dagger dependencies
+    kapt  "com.google.dagger:dagger-compiler:$daggerVersion"
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    implementation "com.google.dagger:dagger:$daggerVersion"
+    implementation "com.google.dagger:dagger-android:$daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$daggerVersion"
+    // This needs to be commented out to use Contributer
+    // kapt  "com.google.dagger:dagger-android-processor:$daggerVersion"
+
+    // Contributer (https://github.com/IVIanuu/Contributer)
+    // This allows us to user dagger to inject into view/controllers/custom types
+    implementation "com.github.IVIanuu.Contributer:contributer-view:$contributerVersion"
+    implementation "com.github.IVIanuu.Contributer:contributer-conductor:$contributerVersion"
+    implementation "com.github.IVIanuu.Contributer:contributer-annotations:$contributerVersion"
+    kapt "com.github.IVIanuu.Contributer:contributer-processor:$contributerVersion"
 
 }

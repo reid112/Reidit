@@ -3,9 +3,8 @@ package ca.rjreid.reidit.di.module
 import android.content.Context
 import ca.rjreid.reidit.BuildConfig
 import ca.rjreid.reidit.data.DataManager
-import ca.rjreid.reidit.data.DataManagerWrapper
+import ca.rjreid.reidit.data.DataManagerImpl
 import ca.rjreid.reidit.data.remote.RedditService
-import ca.rjreid.reidit.di.qualifier.ApplicationContext
 import dagger.Module
 import dagger.Provides
 import okhttp3.Cache
@@ -24,7 +23,7 @@ class DataModule {
     }
 
     @Provides @Singleton
-    fun provideCache(@ApplicationContext context: Context) = Cache(context.cacheDir, 10 * 1024 * 1024.toLong())
+    fun provideCache(context: Context) = Cache(context.cacheDir, 10 * 1024 * 1024.toLong())
 
     @Provides @Singleton
     fun provideGsonConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
@@ -55,5 +54,5 @@ class DataModule {
     fun providesRedditService(retrofit: Retrofit): RedditService = retrofit.create(RedditService::class.java)
 
     @Provides @Singleton
-    fun providesDataManger(redditService: RedditService): DataManager = DataManagerWrapper(redditService)
+    fun providesDataManger(redditService: RedditService): DataManager = DataManagerImpl(redditService)
 }

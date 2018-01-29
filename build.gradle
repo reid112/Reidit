@@ -1,18 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.KOTLIN_VERSION = '1.1.50'
-    ext.SUPPORT_LIB_VERSION = '26.0.2'
-    ext.PLAY_SERVICES_VERSION = '11.0.2'
-
+    ext.kotlin_version = '1.2.10'
     repositories {
         google()
         jcenter()
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-beta6'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
+        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -21,9 +18,45 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
+        maven { url 'https://jitpack.io' }
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+// Define versions in a single place
+ext {
+    // Sdk and tools
+    minSdkVersion = 19
+    targetSdkVersion = 26
+    compileSdkVersion = 26
+    buildToolsVersion = '26.0.2'
+
+    // App dependencies
+    supportLibraryVersion = '26.1.0'
+    playServicesVersion = '11.0.2'
+    constraintLayoutVersion = '1.0.2'
+    multidexVersion = '1.0.2'
+    junitVersion = '4.12'
+    mockitoVersion = '2.8.47'
+    runnerVersion = '1.0.1'
+    espressoVersion = '3.0.1'
+    daggerVersion = '2.14'
+    contributerVersion = '0.0.1'
+    roboelectricVersion = '3.3.2'
+    rxAndroidVersion = '2.0.1'
+    rxJavaVersion = '2.1.1'
+    rxBindingsVersion = '2.0.0'
+    retrofitVersion = '2.3.0'
+    okhtttpVersion = '3.8.1'
+    okhttpMockWebserverVersion = '3.8.1'
+    okhttpLoggingInterceptorVersion = '3.6.0'
+    timberVersion = '4.5.1'
+    evernoteVersion = '1.1.3'
+    gsonVersion = '2.8.1'
+    eventBusVersion = '3.0.0'
+    eventBusAnnotationProcessorVersion = '3.0.1'
+    picassoVersion = '2.5.2'
 }
